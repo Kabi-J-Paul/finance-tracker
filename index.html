@@ -13,7 +13,7 @@
  <header>
 <h1> Student Finance Tracker</h1>
 <p> Budgets, transactions, search</p>
-<nav aria-label="Main navigation">\
+<nav aria-label="Main navigation">
 <ul>
 <li><a href="#about">About</a></li>
 <li><a href="#dashboard">Dashboard</a></li>
@@ -22,20 +22,102 @@
 <li><a href="#settings">Settings</a></li>
 
 </ul>
+
 </nav>
 
 </header>
 <main id = "main" tabindex="-1">
 <section id = "about" aria-labelledby="about-h">
-<h2 id = "about-h">About
-<p>Purpose: help students track spending by description, amount, category, date. Data saves in browser.</p></h2>
-<Contact: <a href="https://github.com/Kabi-J-Paul">My Github Username</a> | 
+<h2 id = "about-h">About</h2>
+<p>Purpose: help students track spending by description, amount, category, date. Data saves in browser.</p>
+<p>Contact: <a href="https://github.com/Kabi-J-Paul">My Github Username</a> | <a href="k.kabi@alustudent.com">My email</a></p>
+</section>
+<section id="dashboard" aria-labelledby="dash-h">
+<h2 id = "dash-h">Dashboard</h2>
+<div><button type="button" data-curr = "GHS">GHS</button><button type="button" data-curr="USD">USD</button><button type="button" data-curr="EUR">EUR</button></div>
+<div class="stats-grid">
+<div class="stat-card"><h3>Total Records</h3><p id = "stat-total">0</p></div>
+<div class="stat-card"><h3>Total<span id="stat-currency">GHS</span></h3><p id="stat-sum">0.00</p></div>
+<div class="stat-card"><h3>Top Category</h3><p id="stat-top">--</p></div>
+<div class="stat-card"><h3>Cap Status</h3><p id="stat-cap-msg">Set cap</p></div>
+
+</div>
+<label for="cap-input">Monthly Cap:</label>
+<input id="cap-input" placeholder="e.g. 500">
+<button id="cap-save" type="button">Save Cap</button>
+<p id="cap-live" role="status" aria-live="polite" class = "live-msg"></p>
+<h3>Last 7 Days</h3>
+<div id="trend-chart" class="trend" role="img" aria-label="7 day bar chart"></div>
+</section>
+<section id="records" aria-labelledby="rec-h">
+<h2 id="rec-h">Records</h2>
+<label for="search-input">Regex Search:</label>
+<input id="search-input" type="search" placeholder="e.g. (coffee|tea) or \.\d{2}\b">
+<div><input type = "checkbox" id="search-case"  checked><label for="search-case" style = "display: inline">Case-insensitive</label></div>
+<p id="search-error" class="error" role="alert" hidden></p>
+<p class="hint"> Try: <code>\.\d{2}\b</code>, <code>(coffee|tea)</code>, <code>\b(\w+)\s+\1\b</code></p>
+<label for="sort-select">Sort:</label>
+<select id="sort-select">
+<option value="date-desc">Date newest</option>
+<option value="date-asc">Date Oldest</option>
+<option value="desc-az">Description A-Z</option>
+<option value="amount-asc">Amount low-high</option>
+<option value="amount-desc">Amount high-low</option>
+</select>
+
+<p id="record-count" role="status">0 records</p>
+<div class="table-wrap" role="region" aria-label="Transactions" tabindex="0">
+<table>
+<caption>Transactions</caption>
+<thead><tr><th>Description</th><th>Amount</th><th>Category</th><th>Date</th><th>Actions</th></tr></thead>
+<tbody id="records-body"></tbody>
+
+</table>
+<p id="no-records" hidden>No records yet.</p>
+<div id="cards-container"></div>
+</div>
+</section>
+<section id="form-section" aria-labelledby="form-h">
+<h2 id="form-h">Add / Edit</h2>
+<form id="record-form" novalidate>
+<input type="hidden" id="f-id">
+<label for="f-desc">Description *</label><input id="f-desc" maxlength="80" placeholder="Lunch at cafeteria"><small class="error" id="e-desc"></small>
+<label for="f-amount">Amount *</label><input id="f-amount" placeholder="12.50"><small class="error" id="e-amount"></small>
+<label for="f-cat">Category *</label><input id="f-cat" list="cat-list" placeholder="Food"><datalist id="cat-list"></datalist><small class="error" id="e-cat"></small>
+<label for="f-date">Date YYYY-MM-DD *</label><input id="f-date" placeholder="2026-10-13"><small class="error" id="e-date"></small>
+<p id="form-status" role="status"></p>
+<button type="submit" id="form-submit">Add Record</button>
+<button type="button" id="form-cancel" hidden>cancel</button>
+</form>
+</section>
+
+<section id="settings" aria-labelledby="set-h">
+<h2 id="set-h">Settings</h2>
+<label for="s-base">Base: </label><select id="s-base"><option>GHS</option><option>USD</option><option>EUR</option></select>
+<label for="s-usd">GHS to USD: </label><input id="s-usd" value = "0.065">
+<label for="s-eur">GHS to EUR: </label><input id="s-eur" value = "0.06">
+<label for="s-display">Display in:</label><select id="s-display"><option>GHS</option><option>USD</option><option>EUR</option></select>
+<label for="s-cats">Categories separated by commas</label><input id="s-cats" value="Food, Books, Transport, Entertainment, Fees, Other">
+<button id="settings-save" type="button">Save Settings</button>
+<h3>Data</h3>
+<button id="btn-export" type="button">Export JSON</button>
+<button id="btn-seed" type="button">Reload Seed</button>
+<button id="btn-clear" type="button">Clear All</button>
+<label for="file-import" class="file-btn" tabindex="0"> Import JSON </label>
+<input id="file-import" type="file" accept=".json" hidden>
+
+<p>Tests: <a href="tests.html">tests.html</a></p>
+<button id="theme-toggle" type="button">Toggle Dark </button>
+
 </section>
 
 
 
 
 </main>
+<footer><p>Vanilla HTML/CSS/JS student project</p></footer>
+<div id="toast" role="status" hidden></div>
+<script type="module" src="scripts/app.js"></script>
 </body>
 
 </html>
