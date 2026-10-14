@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+
+
+<body>
+<h1>Validator Tests</h1>   
+<div id="out"></div> 
+<script type="module">
+import {checkDesc,checkAmount,checkDate,checkCat} from './scripts/validators.js';
+import {compileRegex} from './scripts/search.js';
+var pass=0,fail=0;function t(n,c){var p=document.createElement('p');p.textContent=(c?'PASS ':'FAIL ')+n;document.querySelector('#out').appendChild(p);c?pass++:fail++;}
+t('desc ok',checkDesc('Lunch at cafe')==='');
+t('desc leading space',checkDesc(' Lunch')!=='');
+t('desc dupe tea tea',checkDesc(' tea tea')!=='');
+t('amount 12.50 ok',checkAmount('12.50')==='');
+t('amount 12.555 bad',checkAmount('12.555')!=='');
+t('date ok',checkDate('2025-09-29')==='');
+t('date bad',checkDate('2025-13-01')!=='');
+t('cat ok',checkCat('Bus fare')==='');
+t('cat bad 123',checkCat('Food123')!=='');
+t('regex good', compileRegex('(coffee|tea)','i')!==null);
+t('regex bad (',compileRegex('(','i')===null);
+var s=document.createElement('h2');s.textContent=pass+' passed, '+fail+' failed';document.querySelector('#out').appendChild(s);
+</script>
+</body>
+</html>

@@ -6,6 +6,7 @@ export var RX_DUP = /\b(\w+)\s+\1\b/i;
 export var RX_HAS_LETTER = /^(?=.*[A-Za-z]).+$/;
 
 export function checkDesc(v){
+    if(v!==v.trim()) return 'No leading/trailing spaces.';
     v=v.trim().replace(/\s{2,}/g,' ');
     if(v.length<3) return 'At least 3 chars.';
     if(!RX_DESC.test(v)) return 'No leading/trailing spaces.';
