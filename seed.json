@@ -1,0 +1,14 @@
+[
+{"id": "rec_0001", "description": "Lunch at cafeteria", "amount": 12.5, "category": "Food", "date": "2025-09-29", "createdAt": "2025-09-29T10:00:00.000Z", "updatedAt": "2025-09-29T10:00:00.000Z"},
+{"id": "rec_0002", "description": "Chemistry textbook", "amount": 89.99, "category": "Books", "date": "2025-09-23", "createdAt": "2025-09-23T09:00:00.000Z", "updatedAt": "2025-09-23T09:00:00.000Z"},
+{"id": "rec_0003", "description": "Bus pass", "amount": 45.0, "category": "Transport", "date": "2025-09-20", "createdAt": "2025-09-20T08:00:00.000Z", "updatedAt": "2025-09-20T08:00:00.000Z"},
+{"id": "rec_0004", "description": "Coffee with friends", "amount": 8.75, "category": "Entertainment", "date": "2025-09-28", "createdAt": "2025-09-28T15:00:00.000Z", "updatedAt": "2025-09-28T15:00:00.000Z"},
+{"id": "rec_0005", "description": "Data bundles for the week", "amount": 30.0, "category": "Other", "date": "2025-10-10", "createdAt": "2025-10-10T09:00:00.000Z", "updatedAt": "2025-10-10T09:00:00.000Z"},
+{"id": "rec_0006", "description": "Printing lecture slides", "amount": 0.8, "category": "Fees", "date": "2025-10-11", "createdAt": "2025-10-11T11:00:00.000Z", "updatedAt": "2025-10-11T11:00:00.000Z"},
+{"id": "rec_0007", "description": "Movie night with roommates", "amount": 15.0, "category": "Entertainment", "date": "2025-10-09", "createdAt": "2025-10-09T20:00:00.000Z", "updatedAt": "2025-10-09T20:00:00.000Z"},
+{"id": "rec_0008", "description": "Kigali bus fare round trip", "amount": 15.5, "category": "Transport", "date": "2025-10-08", "createdAt": "2025-10-08T14:00:00.000Z", "updatedAt": "2025-10-08T14:00:00.000Z"},
+{"id": "rec_0009", "description": "Course textbook Statistics", "amount": 180.0, "category": "Books", "date": "2025-09-15", "createdAt": "2025-09-15T08:00:00.000Z", "updatedAt": "2025-09-15T08:00:00.000Z"},
+{"id": "rec_0010", "description": "Green tea and snacks", "amount": 5.2, "category": "Food", "date": "2025-10-12", "createdAt": "2025-10-12T07:30:00.000Z", "updatedAt": "2025-10-12T07:30:00.000Z"},
+{"id": "rec_0011", "description": "Leap day party 2024-02-29", "amount": 30.0, "category": "Other", "date": "2024-02-29", "createdAt": "2024-02-29T18:00:00.000Z", "updatedAt": "2024-02-29T18:00:00.000Z"},
+{"id": "rec_0012", "description": "Year end fees 2025-12-31", "amount": 1000.01, "category": "Fees", "date": "2025-12-31", "createdAt": "2025-12-31T10:00:00.000Z", "updatedAt": "2025-12-31T10:00:00.000Z"}
+]
