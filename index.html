@@ -6,6 +6,9 @@
     <title>Student Finance Tracker</title>
 
     <link rel = "stylesheet" href="styles/main.css">
+    <script>
+        try{if(localStorage.getItem('sft-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}
+    </script>
 </head>
 <body>
  <a class="skip-link" href="#main">Skip to content</a>
@@ -13,6 +16,8 @@
  <header>
 <h1> Student Finance Tracker</h1>
 <p> Budgets, transactions, search</p>
+<button id="theme-toggle" type="button">Toggle Dark </button>
+
 <nav aria-label="Main navigation">
 <ul>
 <li><a href="#about">About</a></li>
@@ -107,7 +112,6 @@
 <input id="file-import" type="file" accept=".json" hidden>
 
 <p>Tests: <a href="tests.html">tests.html</a></p>
-<button id="theme-toggle" type="button">Toggle Dark </button>
 
 </section>
 

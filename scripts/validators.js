@@ -17,6 +17,10 @@ export function checkDesc(v){
 
 export function checkAmount(v){
     if(!RX_AMOUNT.test(v.trim())) return 'Use 12 or 12.50';
+    var n=parseFloat(v);
+    if(!isFinite(n)) return 'Too large.';
+    if(n<=0) return 'Amount must be over 0.';
+    if(n>1000000000) return 'Maximum amount is 1 Billion.';
     return '';
 }
 

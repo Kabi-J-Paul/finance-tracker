@@ -35,6 +35,14 @@ function main(){
       persist();this.reset();$('#f-id').value='';$('#form-submit').textContent='Add Record';$('#form-cancel').hidden=true;$('#form-status').textContent='Saved.';refresh();toast('Saved');
 
 });
+$('#f-amount').addEventListener('input',function(){
+    var msg=checkAmount(this.value);
+    $('#e-amount').textContent=msg;
+    if(parseFloat(this.value)>1000000000){this.value='1000000000';$('#e-amount').textContent='Max 1,000,000,000';}
+    
+
+});
+
 $('#form-cancel').addEventListener('click',function(){$('#record-form').reset();$('#f-id').value='';this.hidden=true;$('#form-submit').textContent='Add Record';});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var b=$('#form-cancel');if(b&&!b.hidden)b.click();}});
 document.querySelector('#records').addEventListener('click',function(e){
@@ -54,6 +62,7 @@ $('#btn-export').addEventListener('click',function(){var blob=new Blob([JSON.str
 $('#btn-clear').addEventListener('click',function(){if(!confirm('Clear all?'))return;records.length=0;persist();refresh();});
 $('#btn-seed').addEventListener('click',function(){fetch('seed.json').then(function(r){return r.json();}).then(function(d){records.length=0;for(var i=0;i<d.length;i++)records.push(d[i]);persist();refresh();});});
 $('#file-import').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result);var err=validateImport(d);if(err){alert(err);return;}records.length=0;for(var j=0;j<d.length;j++)records.push(d[j]);persist();refresh();toast('Imported');}catch(x){alert('Bad JSON');}};rd.readAsText(f);});
-$('#theme-toggle').addEventListener('click',function(){document.body.classList.toggle('dark');});
+if(localStorage.getItem('sft-theme')==='dark')document.documentElement.classList.add('dark');
+$('#theme-toggle').addEventListener('click',function(){document.documentElement.classList.toggle('dark');localStorage.setItem('sft-theme',document.documentElement.classList.contains('dark')?'dark':'light');});
 }
 document.addEventListener('DOMContentLoaded',main);
