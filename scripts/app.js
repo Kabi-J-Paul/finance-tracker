@@ -1,5 +1,5 @@
 import {records,settings,persist,uid,nowIso} from './state.js';
-import { checkDesc,checkAmount,checkDate,checkCat} from './validators.js';
+import { checkDesc,checkAmount,checkDate,checkCat,isDuplicate} from './validators.js';
 import { compileRegex } from './search.js';
 import { validateImport } from './storage.js';
 import { renderTable,renderStats,renderTrend,renderCats,toast } from './ui.js';
@@ -30,6 +30,8 @@ function main(){
       $('#e-desc').textContent=e1;$('#e-amount').textContent=e2;$('#e-cat').textContent=e3;$('#e-date').textContent=e4;
       if(e1||e2||e3||e4){$('#form-status').textContent='Fix errors.';return;}
       d=d.trim().replace(/\s{2,}/g,' ');
+      var dup={description:d,amount:parseFloat(a),category:c.trim(),date:dt.trim()};
+      if(isDuplicate(dup,records,id||'')){$('#form-status').textContent='This records exists already.';return;}
       if(id){for(var i=0;i<records.length;i++)if(records[i].id===id){records[i].description=d;records[i].amount=parseFloat(a);records[i].category=c.trim();records[i].date=dt.trim();records[i].updatedAt=nowIso();}}
       else records.push({id:uid(),description:d,amount:parseFloat(a),category:c.trim(),date:dt.trim(),createdAt:nowIso(),updatedAt:nowIso()});
       persist();this.reset();$('#f-id').value='';$('#form-submit').textContent='Add Record';$('#form-cancel').hidden=true;$('#form-status').textContent='Saved.';refresh();toast('Saved');
@@ -56,12 +58,22 @@ $('#search-input').addEventListener('input', refresh);
 $('#search-case').addEventListener('change',refresh);
 $('#sort-select').addEventListener('change',refresh);
 $('#cap-save').addEventListener('click', function(){settings.cap=$('#cap-input').value.trim();persist();refresh();});
-$('#settings-save').addEventListener('click',function(){settings.base=$('#s-base').value;settings.usd=parseFloat($('#s-usd').value)||0.065;settings.eur=parseFloat($('#s-eur').value)||0.06;settings.display=$('#s-display').value;settings.cats=$('#s-cats').value;persist();refresh();toast('Saved');});
+$('#settings-save').addEventListener('click',function(){settings.base=$('#s-base').value;settings.usd=parseFloat($('#s-usd').value)||0.00077;settings.eur=parseFloat($('#s-eur').value)||0.00070;settings.display=$('#s-display').value;var seenC={};settings.cats=$('#s-cats').value.split(',').map(function(x){return x.trim();}).filter(function(c){var k=c.toLowerCase();if(!c||seenC[k])return false;seenC[k]=1;return true;}).join(', ');$('#s-cats').value=settings.cats;persist();refresh();toast('Saved');});
 document.querySelectorAll('[data-curr]').forEach(function(b){b.addEventListener('click',function(){settings.display=b.getAttribute('data-curr');$('#s-display').value=settings.display;persist();refresh();})});
 $('#btn-export').addEventListener('click',function(){var blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='finance-export.json';a.click();});
+$('#btn-export-csv').addEventListener('click',function(){
+    var head=['id','description','amount','category','date','createdAt','updatedAt'];
+    function cell(v){v=v==null?'':String(v);if(/[",\n]/.test(v)){v='"'+v.replace(/"/g,'""')+'"';}return v;}
+    var rows=[head.join(',')];
+    for(var i=0;i<records.length;i++){var r=records[i];rows.push([cell(r.id),cell(r.description),cell(r.amount),cell(r.category),cell(r.date),cell(r.createdAt),cell(r.updatedAt)].join(','));}
+    var csv=rows.join('\r\n');
+    var blob=new Blob([csv],{type:'text/csv'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='finance-export.csv';a.click();
+    });
 $('#btn-clear').addEventListener('click',function(){if(!confirm('Clear all?'))return;records.length=0;persist();refresh();});
 $('#btn-seed').addEventListener('click',function(){fetch('seed.json').then(function(r){return r.json();}).then(function(d){records.length=0;for(var i=0;i<d.length;i++)records.push(d[i]);persist();refresh();});});
 $('#file-import').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result);var err=validateImport(d);if(err){alert(err);return;}records.length=0;for(var j=0;j<d.length;j++)records.push(d[j]);persist();refresh();toast('Imported');}catch(x){alert('Bad JSON');}};rd.readAsText(f);});
+document.querySelector('label[for="file-import"]').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();$('#file-import').click();}});
 if(localStorage.getItem('sft-theme')==='dark')document.documentElement.classList.add('dark');
 $('#theme-toggle').addEventListener('click',function(){document.documentElement.classList.toggle('dark');localStorage.setItem('sft-theme',document.documentElement.classList.contains('dark')?'dark':'light');});
 }

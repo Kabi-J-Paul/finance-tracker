@@ -34,7 +34,7 @@ export function loadSettings() {
         var s = JSON.parse(localStorage.getItem(KEYS.settings));
         if (s) return s;
     }catch (e) {}
-    return {base:'GHS',usd:0.065,eur:0.06,display:'GHS',cap:'',cats:'Food, Books, Transport, Entertainment, Fees, Other' }
+    return {base:'RWF',usd:0.00077,eur:0.00070,display:'RWF',cap:'',cats:'Food, Books, Transport, Entertainment, Fees, Other' }
 
 }
 export function saveSettings(s) {
@@ -54,3 +54,5 @@ export function validateImport(d) {
     }
     return null;
 }
+
+

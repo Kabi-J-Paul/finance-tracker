@@ -35,3 +35,17 @@ export function checkCat(v){
     if(!RX_CAT.test(v.trim())) return 'Letters/spaces/hyphens only';
     return '';
 }
+
+export function isDuplicate(rec,list,ignoreId){
+    for(var i=0;i<list.length;i++){
+        var r=list[i];
+        if(ignoreId && r.id===ignoreId) continue;
+        if(String(r.description).trim().toLowerCase()===String(rec.description).trim().toLowerCase()
+        && Number(r.amount)===Number(rec.amount)
+        && String(r.category).trim().toLowerCase()===String(rec.category).trim().toLowerCase()
+        && String(r.date)===String(rec.date)){
+            return true;
+        }
+    }
+    return false;
+}

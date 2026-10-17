@@ -13,10 +13,11 @@
 <script type="module">
 import {checkDesc,checkAmount,checkDate,checkCat} from './scripts/validators.js';
 import {compileRegex} from './scripts/search.js';
+import {validateImport} from './scripts/storage.js';
 var pass=0,fail=0;function t(n,c){var p=document.createElement('p');p.textContent=(c?'PASS ':'FAIL ')+n;document.querySelector('#out').appendChild(p);c?pass++:fail++;}
 t('desc ok',checkDesc('Lunch at cafe')==='');
 t('desc leading space',checkDesc(' Lunch')!=='');
-t('desc dupe tea tea',checkDesc(' tea tea')!=='');
+t('desc dupe tea tea',checkDesc('tea tea')!=='');
 t('amount 12.50 ok',checkAmount('12.50')==='');
 t('amount 12.555 bad',checkAmount('12.555')!=='');
 t('date ok',checkDate('2025-09-29')==='');
@@ -25,6 +26,14 @@ t('cat ok',checkCat('Bus fare')==='');
 t('cat bad 123',checkCat('Food123')!=='');
 t('regex good', compileRegex('(coffee|tea)','i')!==null);
 t('regex bad (',compileRegex('(','i')===null);
+t('desc needs letter',checkDesc('123')!=='');
+t('amount zero bad',checkAmount('0')!=='');
+t('amount too big bad',checkAmount('2000000000')!=='');
+t('import not array',validateImport('nope')!=='');
+t('import empty ok',validateImport([])===null);
+t('import valid row',validateImport([{id:'a',description:'x',amount:5,category:'Food',date:'2025-10-01'}])===null);
+t('import missing id',validateImport([{description:'x',amount:5, category:'Food',date:'2025-01-01'}])!=='');
+t('import bad amount',validateImport([{id:'a',description:'x',amount:'5',category:'Food',date:'2025-01-01'}])!=='');
 var s=document.createElement('h2');s.textContent=pass+' passed, '+fail+' failed';document.querySelector('#out').appendChild(s);
 </script>
 </body>

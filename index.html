@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Finance Tracker</title>
+    <link rel = "icon" type="img/svg+xml" href="assets/logo.svg">
 
     <link rel = "stylesheet" href="styles/main.css">
     <script>
@@ -14,9 +15,11 @@
  <a class="skip-link" href="#main">Skip to content</a>
 
  <header>
+<div class="brand">
+<img src="assets/logo.svg" alt="Student Finance Tracker logo" width="40" height="40">
 <h1> Student Finance Tracker</h1>
-<p> Budgets, transactions, search</p>
-<button id="theme-toggle" type="button">Toggle Dark </button>
+</div>
+
 
 <nav aria-label="Main navigation">
 <ul>
@@ -29,20 +32,20 @@
 </ul>
 
 </nav>
-
+<button id="theme-toggle" type="button">Toggle Dark </button>
 </header>
 <main id = "main" tabindex="-1">
 <section id = "about" aria-labelledby="about-h">
 <h2 id = "about-h">About</h2>
 <p>Purpose: help students track spending by description, amount, category, date. Data saves in browser.</p>
-<p>Contact: <a href="https://github.com/Kabi-J-Paul">My Github Username</a> | <a href="k.kabi@alustudent.com">My email</a></p>
+<p>Contact: <a href="https://github.com/Kabi-J-Paul">My Github</a> | <a href="mailto:k.kabi@alustudent.com">My email</a></p>
 </section>
 <section id="dashboard" aria-labelledby="dash-h">
 <h2 id = "dash-h">Dashboard</h2>
-<div><button type="button" data-curr = "GHS">GHS</button><button type="button" data-curr="USD">USD</button><button type="button" data-curr="EUR">EUR</button></div>
+<div><button type="button" data-curr = "RWF">RWF</button><button type="button" data-curr="USD">USD</button><button type="button" data-curr="EUR">EUR</button></div>
 <div class="stats-grid">
 <div class="stat-card"><h3>Total Records</h3><p id = "stat-total">0</p></div>
-<div class="stat-card"><h3>Total<span id="stat-currency">GHS</span></h3><p id="stat-sum">0.00</p></div>
+<div class="stat-card"><h3>Total <span id="stat-currency">RWF</span></h3><p id="stat-sum">0.00</p></div>
 <div class="stat-card"><h3>Top Category</h3><p id="stat-top">--</p></div>
 <div class="stat-card"><h3>Cap Status</h3><p id="stat-cap-msg">Set cap</p></div>
 
@@ -56,11 +59,11 @@
 </section>
 <section id="records" aria-labelledby="rec-h">
 <h2 id="rec-h">Records</h2>
-<label for="search-input">Regex Search:</label>
-<input id="search-input" type="search" placeholder="e.g. (coffee|tea) or \.\d{2}\b">
+<label for="search-input">Search:</label>
+<input id="search-input" type="search" placeholder="e.g. coffee|tea">
 <div><input type = "checkbox" id="search-case"  checked><label for="search-case" style = "display: inline">Case-insensitive</label></div>
 <p id="search-error" class="error" role="alert" hidden></p>
-<p class="hint"> Try: <code>\.\d{2}\b</code>, <code>(coffee|tea)</code>, <code>\b(\w+)\s+\1\b</code></p>
+<p class="hint"> Try: <code>(coffee|tea)</code></p>
 <label for="sort-select">Sort:</label>
 <select id="sort-select">
 <option value="date-desc">Date newest</option>
@@ -86,10 +89,10 @@
 <h2 id="form-h">Add / Edit</h2>
 <form id="record-form" novalidate>
 <input type="hidden" id="f-id">
-<label for="f-desc">Description *</label><input id="f-desc" maxlength="80" placeholder="Lunch at cafeteria"><small class="error" id="e-desc"></small>
-<label for="f-amount">Amount *</label><input id="f-amount" placeholder="12.50"><small class="error" id="e-amount"></small>
-<label for="f-cat">Category *</label><input id="f-cat" list="cat-list" placeholder="Food"><datalist id="cat-list"></datalist><small class="error" id="e-cat"></small>
-<label for="f-date">Date YYYY-MM-DD *</label><input id="f-date" placeholder="2026-10-13"><small class="error" id="e-date"></small>
+<label for="f-desc">Description *</label><input id="f-desc" maxlength="80" placeholder="Lunch at cafeteria" aria-describedby="e-desc"><small class="error" id="e-desc"></small>
+<label for="f-amount">Amount *</label><input id="f-amount" placeholder="12.50" aria-describedby="e-amount"><small class="error" id="e-amount"></small>
+<label for="f-cat">Category *</label><input id="f-cat" list="cat-list" placeholder="Food" aria-describedby="e-cat"><datalist id="cat-list"></datalist><small class="error" id="e-cat"></small>
+<label for="f-date">Date YYYY-MM-DD *</label><input id="f-date" placeholder="2026-10-13" aria-describedby="e-date"><small class="error" id="e-date"></small>
 <p id="form-status" role="status"></p>
 <button type="submit" id="form-submit">Add Record</button>
 <button type="button" id="form-cancel" hidden>cancel</button>
@@ -98,14 +101,15 @@
 
 <section id="settings" aria-labelledby="set-h">
 <h2 id="set-h">Settings</h2>
-<label for="s-base">Base: </label><select id="s-base"><option>GHS</option><option>USD</option><option>EUR</option></select>
-<label for="s-usd">GHS to USD: </label><input id="s-usd" value = "0.065">
-<label for="s-eur">GHS to EUR: </label><input id="s-eur" value = "0.06">
-<label for="s-display">Display in:</label><select id="s-display"><option>GHS</option><option>USD</option><option>EUR</option></select>
+<label for="s-base">Base: </label><select id="s-base"><option>RWF</option><option>USD</option><option>EUR</option></select>
+<label for="s-usd">RWF to USD: </label><input id="s-usd" value = "0.00077">
+<label for="s-eur">RWF to EUR: </label><input id="s-eur" value = "0.00070">
+<label for="s-display">Display in:</label><select id="s-display"><option>RWF</option><option>USD</option><option>EUR</option></select>
 <label for="s-cats">Categories separated by commas</label><input id="s-cats" value="Food, Books, Transport, Entertainment, Fees, Other">
 <button id="settings-save" type="button">Save Settings</button>
 <h3>Data</h3>
 <button id="btn-export" type="button">Export JSON</button>
+<button id="btn-export-csv" type="button">Export CSV</button>
 <button id="btn-seed" type="button">Reload Seed</button>
 <button id="btn-clear" type="button">Clear All</button>
 <label for="file-import" class="file-btn" tabindex="0"> Import JSON </label>
