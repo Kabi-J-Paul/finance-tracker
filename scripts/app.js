@@ -7,7 +7,7 @@ var $=function(s){return document.querySelector(s);};
 function currentList(){
     var q=$('#search-input').value;var ci=$('#search-case').checked;
     var re=compileRegex(q,ci?'i':'');var err=$('#search-error');
-    if(q&&!re){err.hidden=false;err.textContent='Bad regex';}else{err.hidden=true;}
+    if(q&&!re){err.hidden=false;err.textContent='Invalid Pattern';}else{err.hidden=true;}
     var list=records.slice();
     if(re){list=list.filter(function(r){re.lastIndex=0;return re.test(r.description)||re.test(r.category)||re.test(String(r.amount))||re.test(r.date);});}
     var sort=$('#sort-select').value;
@@ -31,7 +31,7 @@ function main(){
       if(e1||e2||e3||e4){$('#form-status').textContent='Fix errors.';return;}
       d=d.trim().replace(/\s{2,}/g,' ');
       var dup={description:d,amount:parseFloat(a),category:c.trim(),date:dt.trim()};
-      if(isDuplicate(dup,records,id||'')){$('#form-status').textContent='This records exists already.';return;}
+      if(isDuplicate(dup,records,id||'')){$('#form-status').textContent='This records already exists.';return;}
       if(id){for(var i=0;i<records.length;i++)if(records[i].id===id){records[i].description=d;records[i].amount=parseFloat(a);records[i].category=c.trim();records[i].date=dt.trim();records[i].updatedAt=nowIso();}}
       else records.push({id:uid(),description:d,amount:parseFloat(a),category:c.trim(),date:dt.trim(),createdAt:nowIso(),updatedAt:nowIso()});
       persist();this.reset();$('#f-id').value='';$('#form-submit').textContent='Add Record';$('#form-cancel').hidden=true;$('#form-status').textContent='Saved.';refresh();toast('Saved');
@@ -76,7 +76,7 @@ $('#btn-export-csv').addEventListener('click',function(){
     });
 $('#btn-clear').addEventListener('click',function(){if(!confirm('Clear all?'))return;records.length=0;persist();refresh();});
 $('#btn-seed').addEventListener('click',function(){fetch('seed.json').then(function(r){return r.json();}).then(function(d){records.length=0;for(var i=0;i<d.length;i++)records.push(d[i]);persist();refresh();});});
-$('#file-import').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result);var err=validateImport(d);if(err){alert(err);return;}records.length=0;for(var j=0;j<d.length;j++)records.push(d[j]);persist();refresh();toast('Imported');}catch(x){alert('Bad JSON');}};rd.readAsText(f);});
+$('#file-import').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result);var err=validateImport(d);if(err){alert(err);return;}if(!confirm('Replace ALL current records with the imported file?'))return;records.length=0;for(var j=0;j<d.length;j++)records.push(d[j]);persist();refresh();toast('Imported');}catch(x){alert('Bad JSON');}};rd.readAsText(f);});
 document.querySelector('label[for="file-import"]').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();$('#file-import').click();}});
 if(localStorage.getItem('sft-theme')==='dark')document.documentElement.classList.add('dark');
 $('#theme-toggle').addEventListener('click',function(){document.documentElement.classList.toggle('dark');localStorage.setItem('sft-theme',document.documentElement.classList.contains('dark')?'dark':'light');});

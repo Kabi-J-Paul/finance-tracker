@@ -25,9 +25,12 @@ export function checkAmount(v){
 }
 
 export function checkDate(v){
-    if(!RX_DATE.test(v.trim())) return 'Use YYYY-MM-DD format';
-    var d=new Date(v);
+    var t=v.trim();
+    if(!RX_DATE.test(t)) return 'Use YYYY-MM-DD format';
+    var p=t.split('-');
+    var d=new Date(t);
     if(isNaN(d.getTime())) return 'Invalid date';
+    if(d.getUTCFullYear()!==Number(p[0])||d.getUTCMonth()+1!==Number(p[1])||d.getUTCDate()!==Number(p[2])) return 'Invalid date';
     return '';
 }
 
