@@ -47,7 +47,7 @@ export function renderTrend(list){
 export function renderCats(s){
     var arr=(s.cats||'').split(',').map(function(x){return x.trim();}).filter(Boolean);
     document.querySelector('#cat-list').innerHTML=arr.map(function(c){return '<option value="'+ esc(c)+'">';}).join('');
-    
+    -
 }
 export function toast(m){var t=document.querySelector('#toast');t.hidden=false;t.textContent=m;setTimeout(function(){t.hidden=true;},2000);}
 
