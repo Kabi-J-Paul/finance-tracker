@@ -3,12 +3,12 @@
 --card: #ffffff;
 --light: #eef3f1;
 --text: #1c2b28;
---gray: #5c6fa5;
+--gray: #4e5c85;
 --border: #dbe4e1;
 --teal: #0f766e;
 --teal-dark: #0b5d56;
 --red: #b42318;
---gold: #c9a86a;
+--gold: #8a6d1f;
 
 }
 
@@ -310,6 +310,36 @@ footer {
     padding: 20px;
     text-align: center;
     color: var(--gray);
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 10px 12px;
+        gap: 6px 10px;
+    }
+
+    header h1 {
+        font-size: 1.25rem;
+    }
+    nav a {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    nav {
+        margin-right: 0;
+
+    }
+    main {
+        padding: 12px;
+    }
+    section {
+        padding: 14px;
+        scroll-margin-top: 210px;
+    }
+    .stat-card p {
+        font-size: 22px;
+    }
 }
 
 @media (min-width: 768px) {

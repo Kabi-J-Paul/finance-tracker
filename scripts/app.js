@@ -45,6 +45,10 @@ $('#f-amount').addEventListener('input',function(){
 
 });
 
+$('#f-desc').addEventListener('input',function(){$('e-desc').textContent=checkDesc(this.value);});
+$('#f-cat').addEventListener('input',function(){('#e-cat').textContent=checkCat(this.value);});
+$('#f-date').addEventListener('input',function(){$('#e-date').textContent=checkDate(this.value);});
+
 $('#form-cancel').addEventListener('click',function(){$('#record-form').reset();$('#f-id').value='';this.hidden=true;$('#form-submit').textContent='Add Record';});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var b=$('#form-cancel');if(b&&!b.hidden)b.click();}});
 document.querySelector('#records').addEventListener('click',function(e){

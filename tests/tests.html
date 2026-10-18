@@ -11,9 +11,9 @@
 <h1>Validator Tests</h1>   
 <div id="out"></div> 
 <script type="module">
-import {checkDesc,checkAmount,checkDate,checkCat} from './scripts/validators.js';
-import {compileRegex} from './scripts/search.js';
-import {validateImport} from './scripts/storage.js';
+import {checkDesc,checkAmount,checkDate,checkCat} from '../scripts/validators.js';
+import {compileRegex} from '../scripts/search.js';
+import {validateImport} from '../scripts/storage.js';
 var pass=0,fail=0;function t(n,c){var p=document.createElement('p');p.textContent=(c?'PASS ':'FAIL ')+n;document.querySelector('#out').appendChild(p);c?pass++:fail++;}
 t('desc ok',checkDesc('Lunch at cafe')==='');
 t('desc leading space',checkDesc(' Lunch')!=='');
