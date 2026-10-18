@@ -4,7 +4,8 @@ A no-framework web app that helps students track daily spending by **description
 
 - 🔗 **Live site:** https://kabi-j-paul.github.io/finance-tracker/
 - 💻 **Repository:** https://github.com/Kabi-J-Paul/finance-tracker
-- 🎥 **Demo video:** https://youtu.be/k6Da2bKsrvY
+- 🎥 **Demo video:** https://youtu.be/Iuej6hUvPjU
+
 
 ---
 
@@ -184,3 +185,7 @@ finance-tracker/
 **Kabi Jean Paul**: [k.kabi@alustudent.com](mailto:k.kabi@alustudent.com)
 
 Front-End Web Development summative project.
+
+THIS README was build using AI.
+
+Demo in 720p if needed - 🎥 **Demo video:** https://youtu.be/k6Da2bKsrvY
