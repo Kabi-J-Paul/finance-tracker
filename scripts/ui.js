@@ -3,7 +3,7 @@ var body=document.querySelector('#records-body');
 var cards=document.querySelector('#cards-container');
 var noRec=document.querySelector('#no-records');
 export function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-export function conv(amt,s){if(s.display==='USD')return amt*s.usd;if(s.display==='EUR')return amt*s.eur;return amt;}
+export function conv(amt,s){if(s.display===s.base)return amt;if(s.display==='USD')return amt*s.usd;if(s.display==='EUR')return amt*s.eur;return amt;}
 export function fmt(n){return Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
 export function renderTable(list,re){
     document.querySelector('#record-count').textContent=list.length+' records';

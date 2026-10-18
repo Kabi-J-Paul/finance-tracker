@@ -31,7 +31,7 @@ function main(){
       if(e1||e2||e3||e4){$('#form-status').textContent='Fix errors.';return;}
       d=d.trim().replace(/\s{2,}/g,' ');
       var dup={description:d,amount:parseFloat(a),category:c.trim(),date:dt.trim()};
-      if(isDuplicate(dup,records,id||'')){$('#form-status').textContent='This records already exists.';return;}
+      if(isDuplicate(dup,records,id||'')){$('#form-status').textContent='This record already exists.';return;}
       if(id){for(var i=0;i<records.length;i++)if(records[i].id===id){records[i].description=d;records[i].amount=parseFloat(a);records[i].category=c.trim();records[i].date=dt.trim();records[i].updatedAt=nowIso();}}
       else records.push({id:uid(),description:d,amount:parseFloat(a),category:c.trim(),date:dt.trim(),createdAt:nowIso(),updatedAt:nowIso()});
       persist();this.reset();$('#f-id').value='';$('#form-submit').textContent='Add Record';$('#form-cancel').hidden=true;$('#form-status').textContent='Saved.';refresh();toast('Saved');
