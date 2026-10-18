@@ -184,6 +184,13 @@ finance-tracker/
 
 **Kabi Jean Paul**: [k.kabi@alustudent.com](mailto:k.kabi@alustudent.com)
 
+## Note on Contributors
+
+The repository shows two contributor names, `Kabi-J-Paul` and
+`kabikabijeanpaul-commits`. Both accounts belong to me (Kabi Jean Paul) — the
+second was used by mistake on the initial commit. All commits are my own work.
+
+
 Front-End Web Development summative project.
 
 THIS README was build with AI assistance
