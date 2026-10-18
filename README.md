@@ -4,6 +4,7 @@ A no-framework web app that helps students track daily spending by **description
 
 - 🔗 **Live site:** https://kabi-j-paul.github.io/finance-tracker/
 - 💻 **Repository:** https://github.com/Kabi-J-Paul/finance-tracker
+- 🎥 **Demo video:** https://youtu.be/k6Da2bKsrvY
 
 ---
 
