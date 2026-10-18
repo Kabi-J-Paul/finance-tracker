@@ -50,7 +50,7 @@ export function validateImport(d) {
         if (!t.description || typeof t.description !== 'string') return 'Row '+(i+1)+' missing description.';
         if (typeof t.amount !== 'number' || isNaN(t.amount)) return 'Row '+ (i+1)+' bad amount.';
         if (!t.category || typeof t.category !== 'string') return 'Row '+(i+1)+' missing category.';
-        if (!t.date || typeof t.date !== 'string') return 'Row '+(i+1)+' missing date.';
+        if (!t.date || typeof t.date !== 'string' || !/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(t.date)) return 'Row '+(i+1)+' bad date.';
     }
     return null;
 }
