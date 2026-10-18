@@ -16,7 +16,7 @@ export function checkDesc(v){
 }
 
 export function checkAmount(v){
-    if(!RX_AMOUNT.test(v.trim())) return 'Use 12 or 12.50';
+    if(!RX_AMOUNT.test(v.trim())) return 'Enter Digits Only with NO commas(,)';
     var n=parseFloat(v);
     if(!isFinite(n)) return 'Too large.';
     if(n<=0) return 'Amount must be over 0.';

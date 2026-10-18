@@ -45,15 +45,15 @@ $('#f-amount').addEventListener('input',function(){
 
 });
 
-$('#f-desc').addEventListener('input',function(){$('e-desc').textContent=checkDesc(this.value);});
-$('#f-cat').addEventListener('input',function(){('#e-cat').textContent=checkCat(this.value);});
+$('#f-desc').addEventListener('input',function(){$('#e-desc').textContent=checkDesc(this.value);});
+$('#f-cat').addEventListener('input',function(){$('#e-cat').textContent=checkCat(this.value);});
 $('#f-date').addEventListener('input',function(){$('#e-date').textContent=checkDate(this.value);});
 
 $('#form-cancel').addEventListener('click',function(){$('#record-form').reset();$('#f-id').value='';this.hidden=true;$('#form-submit').textContent='Add Record';});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var b=$('#form-cancel');if(b&&!b.hidden)b.click();}});
 document.querySelector('#records').addEventListener('click',function(e){
     var ed=e.target.getAttribute('data-edit'),del=e.target.getAttribute('data-del');
-    if(ed){var r=records.find(function(x){return x.id===ed;});if(!r)return;$('#f-id').value=r.id;$('#f-desc').value=r.description;$('#f-amount').value=r.amount;$('#f-cat').value=r.category;$('#f-date').value=r.date;$('#form-submit').textContent='Update';$('#form-cancel').hidden=false;document.querySelector('#form-section').scrollIntoView();}
+    if(ed){var r=records.find(function(x){return x.id===ed;});if(!r)return;$('#e-desc').textContent='';$('#e-amount').textContent='';$('#e-cat').textContent='';$('#e-date').textContent='';$('#f-id').value=r.id;$('#f-desc').value=r.description;$('#f-amount').value=r.amount;$('#f-cat').value=r.category;$('#f-date').value=r.date;$('#form-submit').textContent='Update';$('#form-cancel').hidden=false;document.querySelector('#form-section').scrollIntoView();}
     if(del){if(!confirm('Delete?'))return;for(var i=0;i<records.length;i++)if(records[i].id===del)records.splice(i,1);persist();refresh();}
 
 

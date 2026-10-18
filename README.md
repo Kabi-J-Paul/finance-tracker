@@ -19,6 +19,10 @@ The chosen theme is **personal finance for students** — a lightweight tool to 
 daily spending and keep an eye on a monthly budget. Visually, the app uses a calm
 **teal-and-gold** palette with a **light and dark mode**, and keeps the interface
 minimal so the numbers stay easy to scan.
+
+
+
+
 ---
 
 ## Features
