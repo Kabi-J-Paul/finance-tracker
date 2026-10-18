@@ -186,6 +186,6 @@ finance-tracker/
 
 Front-End Web Development summative project.
 
-THIS README was build using AI.
+THIS README was build with AI assistance
 
 Demo in 720p if needed - 🎥 **Demo video:** https://youtu.be/k6Da2bKsrvY
